@@ -13,13 +13,13 @@
     "tiny-request-router": "^1.2.2"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^2.0.0",
-    "@cloudflare/wrangler": "^1.10.3",
-    "@types/node": "^14.0.24",
-    "prettier": "^2.0.5",
-    "ts-loader": "^8.0.1",
-    "typescript": "^3.9.7",
-    "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.12"
+    "@cloudflare/workers-types": "^2.1.0",
+    "@cloudflare/wrangler": "^1.13.0",
+    "@types/node": "^14.14.31",
+    "prettier": "^2.2.1",
+    "ts-loader": "^8.0.17",
+    "typescript": "^4.2.3",
+    "webpack": "^5.24.3",
+    "webpack-cli": "^4.5.0"
   }
 }
