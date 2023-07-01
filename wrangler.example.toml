@@ -1,9 +1,8 @@
 name = "notion-cloudflare-worker"
-webpack_config = "webpack.config.js"
-type = "webpack"
 workers_dev = true
-
+compatibility_date = "2023-05-18"
+main = "src/index.ts"
 account_id = ""
-zone_id = ""
+vars = { NOTION_TOKEN = "" }
 
 route = "notion-api.splitbee.io/*"
