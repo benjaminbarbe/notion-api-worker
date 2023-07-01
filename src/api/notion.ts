@@ -16,7 +16,7 @@ interface INotionParams {
 }
 
 const loadPageChunkBody = {
-  limit: 30,
+  limit: 100,
   cursor: { stack: [] },
   chunkNumber: 0,
   verticalColumns: false,
@@ -53,14 +53,24 @@ export const fetchPageById = async (pageId: string, notionToken?: string) => {
 };
 
 const queryCollectionBody = {
-  query: { aggregations: [{ property: "title", aggregator: "count" }] },
   loader: {
-    type: "table",
-    limit: 999,
+    type: "reducer",
+    reducers: {
+      collection_group_results: {
+        type: "results",
+        limit: 999,
+        loadContentCover: true,
+      },
+      "table:uncategorized:title:count": {
+        type: "aggregation",
+        aggregation: {
+          property: "title",
+          aggregator: "count",
+        },
+      },
+    },
     searchQuery: "",
     userTimeZone: "Europe/Vienna",
-    userLocale: "en",
-    loadContentCover: true,
   },
 };
 
@@ -72,12 +82,17 @@ export const fetchTableData = async (
   const table = await fetchNotionData<CollectionData>({
     resource: "queryCollection",
     body: {
-      collectionId,
-      collectionViewId,
+      collection: {
+        id: collectionId,
+      },
+      collectionView: {
+        id: collectionViewId,
+      },
       ...queryCollectionBody,
     },
     notionToken,
   });
+
   return table;
 };
 
@@ -114,12 +129,11 @@ export const fetchBlocks = async (
   return await fetchNotionData<LoadPageChunkData>({
     resource: "syncRecordValues",
     body: {
-      recordVersionMap: {
-        block: blockList.reduce((obj, blockId) => {
-          obj[blockId] = -1;
-          return obj;
-        }, {} as { [key: string]: -1 }),
-      },
+      requests: blockList.map((id) => ({
+        id,
+        table: "block",
+        version: -1,
+      })),
     },
     notionToken,
   });
