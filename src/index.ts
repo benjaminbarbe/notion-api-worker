@@ -5,6 +5,7 @@ import { pageRoute } from "./routes/page";
 import { tableRoute } from "./routes/table";
 import { userRoute } from "./routes/user";
 import { searchRoute } from "./routes/search";
+import { notionDatabaseRoute } from "./routes/notion-database";
 import { createResponse } from "./response";
 import { getCacheKey } from "./get-cache-key";
 import * as types from "./api/types";
@@ -26,12 +27,18 @@ router.get("/v1/page/:pageId", pageRoute);
 router.get("/v1/table/:pageId", tableRoute);
 router.get("/v1/user/:userId", userRoute);
 router.get("/v1/search", searchRoute);
+router.get("/notion-api-v1/databases/:databaseId/query", notionDatabaseRoute);
 
 router.get("*", async () =>
   createResponse(
     {
       error: `Route not found!`,
-      routes: ["/v1/page/:pageId", "/v1/table/:pageId", "/v1/user/:pageId"],
+      routes: [
+        "/v1/page/:pageId",
+        "/v1/table/:pageId",
+        "/v1/user/:pageId",
+        "/notion-api-v1/databases/:databaseId/query",
+      ],
     },
     {},
     404

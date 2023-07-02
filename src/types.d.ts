@@ -31,4 +31,5 @@ declare let caches: Caches;
 
 declare global {
   const NOTION_TOKEN: string | undefined;
+  const NOTION_API_TOKEN: string | undefined;
 }

@@ -4,10 +4,8 @@
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
-    "build": "webpack",
     "dev": "wrangler dev",
-    "preview": "wrangler preview",
-    "deploy": "wrangler publish -e production"
+    "deploy": "wrangler deploy"
   },
   "dependencies": {
     "tiny-request-router": "^1.2.2"
