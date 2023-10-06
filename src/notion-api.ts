@@ -24,10 +24,11 @@ class Client {
       },
     };
     this.databases = {
-      query: async ({ database_id, filter, sorts }) => {
+      query: async ({ database_id, filter, sorts, start_cursor }) => {
         const postBody = {
           filter,
           sorts,
+          start_cursor,
         };
         return fetch(`${this.baseUrl}/databases/${database_id}/query`, {
           headers: this.headers,
