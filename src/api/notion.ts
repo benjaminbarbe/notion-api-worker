@@ -127,7 +127,7 @@ export const fetchBlocks = async (
   notionToken?: string
 ) => {
   return await fetchNotionData<LoadPageChunkData>({
-    resource: "syncRecordValues",
+    resource: "syncRecordValuesMain",
     body: {
       requests: blockList.map((id) => ({
         id,
